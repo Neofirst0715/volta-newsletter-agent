@@ -1,0 +1,60 @@
+# Newsletter — Domain context
+
+This file holds Bader's editorial judgment criteria. Because follow-up interviews
+with Bader / Rishabh are no longer possible, it has two layers: layer 1 is leads
+that can be extracted from the existing transcripts (sourced, but not confirmed by
+Bader himself); layer 2 is the remaining unknowns, to be confirmed with Bader when
+real cases come up while the system is running.
+
+---
+
+## Layer 1: Judgment leads extracted from interviews (unconfirmed; cold-start reference only)
+
+1. **Information completeness is a hard gate**
+   > "if there's not much information to include, I don't see a reason
+   > to include it now" — Bader, 2026-09-17 interview (17:08)
+   - Exactly which fields make information "enough" is unclear; see the gaps below.
+
+2. **"Interesting / engagement value" is a soft filter, independent of completeness**
+   > "if it's something that's fresh and has not much engagement value,
+   > I wouldn't include it now" — Bader (17:55)
+   - Note: not enough information ≠ not interesting enough. These are two
+     independent reasons to hold a story; don't merge them.
+
+3. **Deferring is active tracking, not giving up**
+   > "I keep notes... maybe I should revisit this the next month and see
+   > if there has been any updates" — Bader (17:35)
+
+4. **Every story must have a traceable source link**
+   > "I link everything. That's really important." — Bader (2:59)
+
+5. **A founder's consent is required before using their story**
+   — Bader (around 15:47)
+
+6. **The opening slot (founder highlight) is filtered more strictly than later sections**
+   — Bader (7:29): doesn't want to put up things that aren't interesting
+
+7. **Content categories go beyond "individual founder achievements"**
+   > Hackathon output, AI lab stories, user growth, fundraising progress, etc.
+   > can all be material — Matt, 2026-09-17 interview (around 9:26–9:43)
+   - But final prioritization is still decided by Bader (possibly with Laura
+     and Amy), not Matt.
+
+---
+
+## Layer 2: Gaps to confirm (don't guess; flag to Bader when they come up at runtime)
+
+- [ ] Concrete criteria for "enough information": which fields (founder name?
+      achievement description? source link? permission status?) make a story
+      complete? Currently completely unknown.
+- [ ] How is "interesting / engagement value" judged? Are there past examples to reference?
+- [ ] How long can a story in the buffer pool go without updates before Bader
+      should be prompted to reconsider it? (Bader never gave a threshold;
+      "revisit next month" is the only lead.)
+- [ ] What roles do Laura / Amy play in the judgment process? (Matt mentioned
+      them; in Bader's interview Laura is mainly one of the information sources.
+      Role boundaries are unclear.)
+
+**Principle**: If any of the items above is needed while the system is running,
+always mark it as "Needs Bader confirmation" and record the specific question.
+Never substitute a guessed value.
