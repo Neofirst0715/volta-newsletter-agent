@@ -159,15 +159,50 @@ Compare against every existing record:
     `first_seen_date` or `status`.
 
 ### Step 8 — Receipt
+The receipt has two layers, written in English. By default output **only the
+short receipt**; this is the only thing Bader sees after an intake.
+
+**Short receipt (default)** — fixed format, 1–2 lines:
 ```
-story-intake receipt
-- Action: created story-XXX | updated story-XXX (changed: <field list>)
-- Written: subject=…; category=…; permission_status=…; standalone_ready=…
-- completeness_status: <value> (system default rule, pending Bader confirmation)
-- Missing fields: <list, or none>
-- Permission basis: "<quoted sentence>" | none found → not_asked
-- Needs Bader confirmation: <questions, or none>
+✅ Recorded — <one sentence: subject + event + key result>
+Missing: <item>, <item>
 ```
+- No field names anywhere (`subject:`, `category:`, `source_link:` …) and no
+  bullet list or field-style layout. The first line is one natural-language
+  sentence built only from facts in the record.
+- `Missing:` lists only what Bader has to act on or may need to supply later,
+  in plain words, comma-separated:
+  - a required field that is `missing` → "founder name", "what happened",
+    "source link"
+  - `needs_bader_confirmation` on the founder name → "founder name (only the
+    company is named)"
+  - `permission_status` is `not_asked` → "consent"; `asked_pending` → "consent
+    (asked, awaiting reply)"; `declined` → "consent (declined)"
+  - an open question the intake couldn't resolve (e.g. which part of the text
+    was Bader's note) → a short question
+- Internal results Bader doesn't need to handle (category, standalone_ready,
+  that a link *was* found, completeness bookkeeping) never appear.
+- If nothing is missing and consent is `granted`, omit the `Missing:` line
+  entirely (don't write "Missing: none").
+- For an update, start with `✅ Updated story-XXX — <sentence>`; otherwise the
+  same rules apply.
+
+Example (fictional input — a LinkedIn post with no URL, note "I'll ask her"):
+```
+✅ Recorded — Jane Doe's Acme Robotics closed a $1.5M pre-seed round led by Example Ventures.
+Missing: source link, consent
+```
+
+**Full record (only on request)** — only when the user asks about a specific
+record ("what did you record for story-XXX?", "show me the full record").
+Still natural-language prose, not a field list, covering:
+- the full story as recorded
+- the source link(s), if any
+- what is missing and why, citing what the original material did or didn't say
+  (no inference)
+- the consent status and the sentence it's based on (or that none was found)
+- Bader's verbatim note, if any
+
 The receipt reports **only this record**. It never mentions the pool size, the
 record's position in the pool, or how many records remain until the next summary.
 
