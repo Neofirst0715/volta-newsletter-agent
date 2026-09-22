@@ -22,7 +22,7 @@ using manually exported CSVs (there is no back-end access for precise tracking).
 |---|---|---|
 | `story-intake` | Structures pasted raw material into one candidate story in the buffer pool | You paste text about a founder, event, hackathon, fundraising, etc. |
 | `buffer-audit` | Reports where each candidate story stands: missing info, permission status, days on hold, and which stories meet the secondary-issue conditions. On explicit instruction only, marks a story as used or assembles a short secondary-issue draft | Before drafting the next issue, to see which stories are worth another look, or after a story has gone out |
-| `click-conversion` | Cross-references a Mailchimp click CSV with an Eventbrite registration CSV to estimate conversion | You have both CSV exports for an issue |
+| `click-conversion` | *Out of scope for this iteration.* Cross-references a Mailchimp click CSV with an Eventbrite registration CSV to estimate conversion | You have both CSV exports for an issue (once implemented) |
 
 > **Status:**
 > - `story-intake` and `buffer-audit` have execution logic (field extraction, dedup, ids,
@@ -30,20 +30,25 @@ using manually exported CSVs (there is no back-end access for precise tracking).
 >   defaults** listed in `newsletter/CLAUDE.md` (e.g. the completeness rule and the 30-day
 >   reminder) that are pending the editor's confirmation, and has only been checked against a
 >   fictional test input so far.
-> - `click-conversion` still defines only its boundaries. **To be added** once real CSV
->   exports are available: column names, matching rules, and how the rate is calculated.
-> - `.claude/rules/brand-voice.md` is still TODO, pending past newsletter issues.
+> - `click-conversion` — **out of scope for this iteration.** There are no real Mailchimp /
+>   Eventbrite CSV samples yet, and its execution logic can't be written without real data.
+>   Its boundary definition stays in place; column names, matching rules and the rate
+>   calculation will be added once real samples are available.
+> - `.claude/rules/brand-voice.md` — **out of scope for this iteration.** There are no past
+>   newsletter issues to derive voice rules from. This doesn't block the system: the
+>   secondary-issue draft only stitches together existing `summary` fields from
+>   `stories.md`, with no rewriting or tone polishing, so everything runs without it.
 
 ## Repository layout
 
 ```
 CLAUDE.md                     Entry point — reading order for the agent
 .claude/
-  rules/brand-voice.md        Writing voice rules (TODO)
+  rules/brand-voice.md        Writing voice rules (out of scope this iteration)
   skills/
     story-intake/             Raw material → structured story
     buffer-audit/             Audit the buffer pool
-    click-conversion/         Estimate click → registration conversion
+    click-conversion/         Estimate click → registration conversion (out of scope this iteration)
 memory/
   manifest.md                 What the system is, why it exists, core principles
   lessons.md                  Pitfalls log
@@ -66,7 +71,8 @@ newsletter/
 3. Claude Code picks up `CLAUDE.md` and the skills automatically. Examples:
    - Paste a Slack message about a founder's milestone → `story-intake` adds it to the buffer pool.
    - "What's in the buffer pool right now?" → `buffer-audit`.
-   - Attach the Mailchimp and Eventbrite CSVs for an issue → `click-conversion`.
+   - `click-conversion` (Mailchimp + Eventbrite CSVs) is out of scope for this iteration —
+     see the status note above.
 
 ## Core principles
 

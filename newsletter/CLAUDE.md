@@ -65,6 +65,18 @@ Bader gives a real answer, and log the change in `memory/lessons.md`.
    to a multiple of 5 does it append "Current buffer pool: N candidate
    stories"; otherwise it never mentions counts or progress.
 
+## Out of scope for this iteration
+
+- **click-conversion**: no real Mailchimp / Eventbrite CSV samples yet, so its
+  execution logic can't be written without inventing column names and matching
+  rules. The skill keeps its boundary definition and will be completed once real
+  samples are available.
+- **brand-voice**: no past newsletter issues from Bader yet, so voice rules
+  can't be derived. This does **not** block the system: the secondary-issue
+  draft (buffer-audit) only stitches together existing `summary` fields from
+  `memory/stories.md`, with no rewriting or tone polishing, so the system runs
+  end to end without brand-voice rules.
+
 ---
 
 ## Layer 2: Gaps to confirm (don't guess; flag to Bader when they come up at runtime)

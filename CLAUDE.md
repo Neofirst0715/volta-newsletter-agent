@@ -12,20 +12,22 @@ read the files in the order below instead of exploring the directory on your own
    unknowns that must be flagged to Bader)
 
 ## Rules
-- `.claude/rules/brand-voice.md` — writing voice rules (currently TODO, pending
-  Bader's past newsletter issues)
+- `.claude/rules/brand-voice.md` — writing voice rules. **Out of scope for this
+  iteration**: no past newsletter issues from Bader yet, so voice rules can't be
+  derived. This doesn't block the system — the secondary-issue draft only stitches
+  existing `summary` fields together, with no rewriting or tone polishing.
 
 ## Three skills
 - `.claude/skills/story-intake/` — structure raw material that Bader pastes in
 - `.claude/skills/buffer-audit/` — audit the buffer pool and check whether information is complete
 - `.claude/skills/click-conversion/` — cross-reference Mailchimp × Eventbrite CSVs
-  to estimate conversion rate
+  to estimate conversion rate. **Out of scope for this iteration**: no real
+  Mailchimp / Eventbrite CSV samples yet, so execution logic can't be written
+  without real data; to be completed once real samples are available.
 
 `story-intake` and `buffer-audit` have execution logic, running on the system
 defaults in `newsletter/CLAUDE.md` (pending Bader's confirmation).
-`click-conversion` still defines only its boundaries; its execution logic will
-be added once real CSV files are available, to avoid inventing logic without
-real data.
+`click-conversion` keeps only its boundary definition (see above).
 
 ## Data
 - `newsletter/memory/stories.md` — the buffer pool (digitized pool of candidate

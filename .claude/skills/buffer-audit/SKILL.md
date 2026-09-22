@@ -147,8 +147,10 @@ More than 2 → ask which 1–2. No ids named → ask; don't pick stories yourse
    missing". Don't refuse; don't put warnings inside the copyable text.
 3. Assemble the draft by stitching only — `summary` copied **verbatim**, with
    its `source_link`. No headline, intro, outro, transitions or rewording
-   (brand voice rules in `.claude/rules/brand-voice.md` are still TODO; Bader
-   adds his own framing in Mailchimp).
+   (brand voice rules in `.claude/rules/brand-voice.md` are out of scope for
+   this iteration — no past newsletter issues to derive them from. This doesn't
+   block drafting, since the draft only stitches existing `summary` fields;
+   Bader adds his own framing in Mailchimp).
 4. Output as a plain-text code block so it copies cleanly:
    ```
    <summary of story A, verbatim>
