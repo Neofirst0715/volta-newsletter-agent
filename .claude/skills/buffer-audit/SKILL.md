@@ -13,8 +13,9 @@ description: Audit the newsletter buffer pool at newsletter/memory/stories.md an
    permission status, days on hold, a stale-story reminder, the two independent
    hold reasons, questions for Bader, and the stories that objectively meet the
    secondary-issue conditions.
-2. **Mark as used (write, explicit instruction only)**: changes one story's
-   `status` to `used_secondary` / `used_main`.
+2. **Mark as used (write, explicit instruction only)**: changes the named
+   stories' `status` to `used_secondary` / `used_main`, and confirms with each
+   story's verbatim summary.
 3. **Secondary-issue draft (explicit request only)**: stitches the `summary` of
    1–2 named stories into a short plain-text draft for Bader to paste into
    Mailchimp himself.
@@ -132,14 +133,44 @@ not a recommendation, not ranked.
 
 ---
 
+## Confirmation format (shared by Actions 2 and 3)
+
+Every confirmation — marking stories as main issue, marking as secondary issue,
+and the confirmation part of a secondary-issue draft — uses the same shape:
+```
+<header line>
+
+- story-XXX — <title>: <summary, quoted verbatim from stories.md>
+- story-YYY — <title>: <summary, quoted verbatim from stories.md>
+
+⚠️ <combined warnings>
+```
+- `<title>` = the record's `subject`, plus ` @ <event or context>` if the
+  record names one — same wording as the summary line format. No invented titles.
+- The summary is copied exactly as stored in `stories.md`. Never search for,
+  infer or add information the record doesn't contain. If the stored summary is
+  short or incomplete, show it as is — don't expand it to make the confirmation
+  look complete. If `summary` is `missing`, write `summary missing`.
+- `⚠️` line: one combined line listing facts that still need attention, grouped
+  by issue, e.g. `⚠️ No consent yet: story-003, story-005 · No source link:
+  story-004`. Cover consent not `granted`, `source_link` missing, and
+  `completeness_status` not `complete`. If nothing applies, omit the line.
+- Header lines:
+  - Main issue: `Stories 003, 004, 005 marked as main issue content, issue <YYYY-MM or unknown>.`
+  - Secondary issue: `Story 006 marked as secondary issue content, issue <YYYY-MM-DD or unknown>.`
+  - Draft: `Secondary-issue draft assembled from stories 006, 007 (not saved, not sent, not marked as used).`
+  (Use `Story` / `Stories` to match the count.)
+
+---
+
 ## Action 2 — Mark as used (write; explicit instruction only)
 
-**Trigger**: only an explicit instruction that names the id and the issue type,
+**Trigger**: only an explicit instruction that names the id(s) and the issue type,
 e.g. "use story-004 for the secondary issue", "story-002 went out in the main
 issue". Anything vaguer ("story-004 seems good for a secondary", "let's think
 about story-004") is **not** a trigger — ask instead of writing.
 
-**Steps**
+**Steps** (one instruction may name several stories; apply each step per story)
 1. Find the record. Not found → say so and stop.
 2. If its `status` is already `used_secondary` or `used_main` → stop and tell the
    user (this is what prevents one story being consumed by both issues). Change
@@ -150,7 +181,8 @@ about story-004") is **not** a trigger — ask instead of writing.
 4. Set `status` to `used_secondary (issue: <date the user gave, or unknown>)` or
    `used_main (issue: <YYYY-MM the user gave, or unknown>)`. Set
    `last_updated_date` to today. Change no other field.
-5. Receipt: `Marked story-XXX as <status>; last_updated_date → YYYY-MM-DD.`
+5. Reply with the shared confirmation format above (main or secondary header),
+   listing every story just marked with its verbatim summary.
 
 ---
 
@@ -162,9 +194,10 @@ More than 2 → ask which 1–2. No ids named → ask; don't pick stories yourse
 **Steps**
 1. Read the named records. If a `summary` is `missing`, that story can't be
    drafted — say so and draft only the others (or nothing).
-2. Before the draft, list factual warnings **outside** the draft block, e.g.
-   "story-004: permission_status = not_asked", "story-004: source_link =
-   missing". Don't refuse; don't put warnings inside the copyable text.
+2. Before the draft, output the shared confirmation format above (draft
+   header, each story with its verbatim summary, `⚠️` line). This stays
+   **outside** the draft block — never put warnings inside the copyable text.
+   Don't refuse because of warnings.
 3. Assemble the draft by stitching only — `summary` copied **verbatim**, with
    its `source_link`. No headline, intro, outro, transitions or rewording
    (brand voice rules in `.claude/rules/brand-voice.md` are out of scope for
@@ -182,8 +215,8 @@ More than 2 → ask which 1–2. No ids named → ask; don't pick stories yourse
    Source: <source_link of story B>
    ```
    (If a `source_link` is `missing`, write `Source: missing` — never omit or invent.)
-5. After the draft, state: "Not saved, not sent, and the stories are not marked
-   as used. To mark them, say 'use story-XXX for the secondary issue'."
+5. After the draft, state: "To mark them as used, say 'use story-XXX for the
+   secondary issue'."
 
 ---
 
