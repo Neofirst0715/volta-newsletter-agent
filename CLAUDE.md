@@ -21,10 +21,11 @@ read the files in the order below instead of exploring the directory on your own
 - `.claude/skills/click-conversion/` — cross-reference Mailchimp × Eventbrite CSVs
   to estimate conversion rate
 
-Each skill's `SKILL.md` currently defines only its boundaries (what it does /
-what it doesn't do / inputs and outputs). Execution logic is not written yet —
-it will be added once real samples (pasted text, CSV files) are available, to
-avoid inventing logic without real data.
+`story-intake` and `buffer-audit` have execution logic, running on the system
+defaults in `newsletter/CLAUDE.md` (pending Bader's confirmation).
+`click-conversion` still defines only its boundaries; its execution logic will
+be added once real CSV files are available, to avoid inventing logic without
+real data.
 
 ## Data
 - `newsletter/memory/stories.md` — the buffer pool (digitized pool of candidate

@@ -21,12 +21,18 @@ using manually exported CSVs (there is no back-end access for precise tracking).
 | Skill | What it does | Use when |
 |---|---|---|
 | `story-intake` | Structures pasted raw material into one candidate story in the buffer pool | You paste text about a founder, event, hackathon, fundraising, etc. |
-| `buffer-audit` | Reports where each candidate story stands: missing info, permission status, days on hold | Before drafting the next issue, or to see which stories are worth another look |
+| `buffer-audit` | Reports where each candidate story stands: missing info, permission status, days on hold, and which stories meet the secondary-issue conditions. On explicit instruction only, marks a story as used or assembles a short secondary-issue draft | Before drafting the next issue, to see which stories are worth another look, or after a story has gone out |
 | `click-conversion` | Cross-references a Mailchimp click CSV with an Eventbrite registration CSV to estimate conversion | You have both CSV exports for an issue |
 
-> **Status:** each `SKILL.md` currently defines only its boundaries (what it does / doesn't
-> do, inputs, outputs, rules). Execution details will be added once real pasted samples and
-> CSV exports are available, rather than invented up front.
+> **Status:**
+> - `story-intake` and `buffer-audit` have execution logic (field extraction, dedup, ids,
+>   receipts; audit report, mark-as-used, secondary-issue draft). It runs on **system
+>   defaults** listed in `newsletter/CLAUDE.md` (e.g. the completeness rule and the 30-day
+>   reminder) that are pending the editor's confirmation, and has only been checked against a
+>   fictional test input so far.
+> - `click-conversion` still defines only its boundaries. **To be added** once real CSV
+>   exports are available: column names, matching rules, and how the rate is calculated.
+> - `.claude/rules/brand-voice.md` is still TODO, pending past newsletter issues.
 
 ## Repository layout
 
