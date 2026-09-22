@@ -78,11 +78,31 @@ description: Audit the newsletter buffer pool at newsletter/memory/stories.md an
    `completeness_status = complete` **and** `permission_status = granted`
    **and** `standalone_ready = true`. Pure filter; `id` order; no ranking.
 
+### Summary line format
+Whenever the report lists stories, each story is one line:
+```
+story-XXX — <subject> @ <event or context> (<key result>, <link marker>)
+```
+- `<subject>`, `<event or context>` and `<key result>` come from the record's
+  `subject` / `summary` wording — no rephrasing into claims the record doesn't
+  make. Drop `@ <event or context>` if the record names none; write `unknown
+  subject` if `subject` is `missing`.
+- `<key result>` is the concrete fact (award name, amount, number); omit it if
+  the record has none.
+- `<link marker>`: `✅ link` if `source_link` has a value, `❌ no link` if it's
+  `missing`.
+- Example: `story-004 — God's Plan @ Hack the North (Best Use of Devin, ✅ link)`
+- Sections may append a short suffix after the line (e.g. `— 34 days since
+  last update`, `— "<verbatim note>"`).
+
 ### Report format (in the conversation, not saved to a file)
 ```
 ## Buffer pool audit — YYYY-MM-DD
 Pool: N records — candidate a · on_hold b · used_secondary c · used_main d
 (Scope: <user's filter, or all>)
+
+### Summary (id order, one summary line per active story)
+- <summary line>
 
 ### Per-story status (id order)
 | id | subject | category | completeness | missing | permission | days in pool | days since update | standalone_ready |
@@ -90,14 +110,14 @@ Pool: N records — candidate a · on_hold b · used_secondary c · used_main d
 (permission ≠ granted → add "— not usable as is" in the permission cell)
 
 ### Suggest re-evaluating (> 30 days since last update · system default, pending Bader confirmation)
-- story-XXX — N days since last update
+- <summary line> — N days since last update
 (or: none)
 
 ### Hold reason A — information insufficient
-- story-XXX — missing: <fields>
+- <summary line> — missing: <fields>
 
 ### Hold reason B — engagement value questioned (Bader's own notes only)
-- story-XXX — "<verbatim note>"
+- <summary line> — "<verbatim note>"
 (or: none recorded)
 
 ### Needs Bader confirmation
@@ -106,7 +126,7 @@ Pool: N records — candidate a · on_hold b · used_secondary c · used_main d
 ### Stories meeting secondary-issue conditions
 Objective filter only (complete + permission granted + standalone_ready = true);
 not a recommendation, not ranked.
-- story-XXX — <subject>
+- <summary line>
 (or: none)
 ```
 
