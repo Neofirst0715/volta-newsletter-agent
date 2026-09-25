@@ -1,3 +1,37 @@
+# Raw interview material: reference only, never committed
 research/
+
+# Secrets: never committed
+.env
+.env.*
+*credentials*
+*token*
+*.pem
+*.key
+
+# Scratch output of the checks
+work/
+
+# Real inbox items (founder news, submitters' email addresses) stay local.
+inbox/*
+!inbox/.gitkeep
+
+# Team form exports (submitters' email addresses) stay local.
+intake/*
+!intake/.gitkeep
+
+# Local tool / OS files
 .idea/
 .DS_Store
+__pycache__/
+.claude/settings.local.json
+
+# Real working data under state/ stays local.
+# Only the templates and .gitkeep files are tracked.
+# (Per-level patterns: git cannot re-include a file whose parent dir is ignored.)
+state/*
+!state/ledger.example.md
+!state/issues/
+state/issues/*
+!state/issues/.gitkeep
+!state/issues/example.md
